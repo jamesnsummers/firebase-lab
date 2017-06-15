@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { firebase, auth } from './utils/firebase';
 import Header from './components/Header.js'
@@ -40,7 +39,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header
+          loginButtonClicked={this.loginButtonClicked.bind(this)}
+          logoutButtonClicked={this.logoutButtonClicked.bind(this)}
+        />
       </div>
     );
   }
