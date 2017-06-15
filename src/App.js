@@ -8,20 +8,26 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = ({
-      currentUser: null
+      loggedIn: this.props.currentUser
     })
   }
 
   loginButtonClicked(e) {
     e.preventDefault();
-    // tell Firebase auth to log in
+    // set up provider
+    const provider = new firebase.auth.GoogleAuthProvider();
     console.log("signing in")
+    // tell Firebase auth to log in with a popup and that provider
+    auth.signInWithPopup(provider);
   }
+
 
   logoutButtonClicked(e) {
     e.preventDefault();
     // tell Firebase auth to log out
     console.log("signing out");
+    auth.signOut();
+    console.log(this.state.currentUser)
   }
 
   componentWillMount() {
@@ -42,6 +48,7 @@ class App extends Component {
         <Header
           loginButtonClicked={this.loginButtonClicked.bind(this)}
           logoutButtonClicked={this.logoutButtonClicked.bind(this)}
+          currentUser={this.state.currentUser}
         />
       </div>
     );
